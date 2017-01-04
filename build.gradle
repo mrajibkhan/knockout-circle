@@ -27,6 +27,29 @@ repositories {
 
 
 dependencies {
-	compile ('org.springframework.boot:spring-boot-starter', 'com.google.guava:guava:20.0')
+	compile ('com.fasterxml.jackson.core:jackson-databind:2.8.4', 'com.fasterxml.jackson.core:jackson-annotations:2.8.4')
+	compile ('org.springframework.boot:spring-boot-starter')
+	compile ('com.google.guava:guava:20.0')
+
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile ('junit:junit:[4,)')
+}
+
+test {
+	testLogging {
+		// set options for log level LIFECYCLE
+		events "failed", "passed"
+		exceptionFormat "short"
+
+		// set options for log level DEBUG
+		debug {
+			events "started", "skipped", "failed"
+			exceptionFormat "full"
+		}
+
+		// remove standard output/error logging from --info builds
+		// by assigning only 'failed' and 'skipped' events
+		info.events = ["failed", "skipped"]
+	}
 }

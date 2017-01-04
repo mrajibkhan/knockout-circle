@@ -10,3 +10,19 @@ simulates kids' game where kids stands in a circle and gets knocked out in order
       with the child immediately next to the eliminated one.
     * Children are so removed from the circle one by one. The winner is the 
       child left standing last.
+
+# Run Tests
+./gradlew clean test
+
+# Build
+./gradlew build
+
+# Run the application
+
+java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=<integer> --k=<integer>
+
+'n' is the number of children playing the game (optional)
+'k' is the counter (optional)
+
+If you don't provide these values then the program will ask you to provide these values at the start.  
+

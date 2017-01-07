@@ -19,6 +19,12 @@ public class KnockoutGame {
     private FluentIterable<Player> cyclicPlayers;
     private int counter;
 
+    /**
+     * Instantiates KnockoutGame by creating Iterables (FluentIterable), Cyclic Iterable
+     * and sets the counter
+     * @param totalPlayers
+     * @param counter
+     */
     public KnockoutGame(int totalPlayers, int counter) {
         Stream<Player> playerStream = IntStream.rangeClosed(1, totalPlayers).mapToObj(i -> new Player(i));
 

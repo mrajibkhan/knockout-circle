@@ -14,12 +14,21 @@ import java.util.List;
 
 /**
  * Created by rajib.khan on 1/4/17.
+ *
  */
 @Component
 public class KnockoutService {
 
     Logger log = LoggerFactory.getLogger(KnockoutService.class);
 
+    /**
+     * Service method to run the game and provide the result. Iterates through the cyclic iterator
+     * of players and removes players based on the counter value in the game.
+     * @param game instance of the {@code KnockoutGame}
+     * @return {@code GameResult}
+     * @throws InsufficientPlayersException when execution fails due to the number of players e.g. 0 or negative
+     * @throws InvalidCounterException when execution fails due to the value of counter e.g. 0 or negative
+     */
     public GameResult execute(KnockoutGame game) throws InsufficientPlayersException, InvalidCounterException {
         GameResult result = new GameResult();
         Player knockedOutPlayer;
@@ -36,7 +45,7 @@ public class KnockoutService {
 
         while (game.getPlayerList().size() > 1) {
             loopCount++;
-            knockedOutPlayer = getAtIndex(cyclicIterator, game.getCounter() -1);
+            knockedOutPlayer = getAtIndex(cyclicIterator, game.getCounter());
             result.add(game.getPlayers().size(), knockedOutPlayer);
             cyclicIterator.remove();
             log.info("Iteration " + loopCount + " - OUT: " + knockedOutPlayer);
@@ -50,8 +59,15 @@ public class KnockoutService {
         return result;
     }
 
+    /**
+     * Iterates starting from the current pointer position of the iterator
+     * and returns the element ({@code Player}) at the index
+     * @param iterator
+     * @param index
+     * @return
+     */
     protected Player getAtIndex (Iterator<Player> iterator, int index) {
-        for(int i=0; i < index; i++) {
+        for(int i=0; i < index -1; i++) {
             iterator.next();
         }
 

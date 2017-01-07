@@ -11,19 +11,31 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by rajib.khan on 1/2/17.
+ * Sets up the configuration for a game i.e.
+ * number of kids / players (n) and the counter (k).
  */
 
 @Component
 public class GameController {
 
+    private KnockoutService knockoutService;
+
     @Autowired
-    private KnockoutService service;
+    public void setService(KnockoutService knockoutService) {
+        this.knockoutService = knockoutService;
+    }
 
-    private int numberOfPlayers;
-    private int counter;
+    protected int numberOfPlayers;
+    protected int counter;
 
+    /**
+     * Runs the game and returns the result
+     * @return GameResult
+     * @throws InsufficientPlayersException when execution fails due to the number of players e.g. 0
+     * @throws InvalidCounterException when execution fails due to the value of counter
+     */
     public GameResult playGame() throws InsufficientPlayersException, InvalidCounterException {
-        return service.execute(new KnockoutGame(numberOfPlayers, counter));
+        return knockoutService.execute(new KnockoutGame(numberOfPlayers, counter));
     }
 
     public int getNumberOfPlayers() {

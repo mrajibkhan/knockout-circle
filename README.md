@@ -1,5 +1,5 @@
 # **knockout-circle**
-simulates kids' game where kids stands in a circle and gets knocked out in order based on a counter
+Simulates kids' game where all kids stand in a circle and get knocked out in order based on a counter
 
 # **Rules:**
     * n children stand around a circle. 

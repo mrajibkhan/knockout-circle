@@ -20,6 +20,8 @@ public class KnockoutApplication implements CommandLineRunner {
 	@Autowired
 	GameController controller;
 
+	Scanner scanner;
+
 	@Override
 	public void run(String... args) {
 		readUserInput();
@@ -34,13 +36,20 @@ public class KnockoutApplication implements CommandLineRunner {
 	}
 
 	protected void readUserInput () {
-		if (controller.getNumberOfPlayers() == 0 && controller.getCounter() == 0) {
-			try (Scanner scanner = new Scanner(System.in)) {
-				log.info("Enter number of KIDS (n)");
-				controller.setNumberOfPlayers(scanner.nextInt());
+		if (controller.getNumberOfPlayers() < 1 || controller.getCounter() < 1) {
+			try {
+				if (scanner == null) {
+					scanner = new Scanner(System.in);
+				}
+				if (controller.getNumberOfPlayers() < 1) {
+					log.info("Enter number of players / kids (n)");
+					controller.setNumberOfPlayers(scanner.nextInt());
+				}
 
-				log.info("Enter value of counter (k)");
-				controller.setCounter(scanner.nextInt());
+				if(controller.getCounter() < 1) {
+					log.info("Enter value of counter (k)");
+					controller.setCounter(scanner.nextInt());
+				}
 
 			} catch (InputMismatchException ex) {
 				log.error("Error: Input Mismatch. Please provide a valid integer value");

@@ -27,6 +27,10 @@ production quality application. This application is a command line application w
 game, shows the result, logs information and exits. But this application can easily be extended to run as a webb application 
 or run as a API, used from other applications, add security etc. as spring provides all these features. The flip side is the 
 size of the deliverable codebase / package which is quite large considering the requirements of the application.  
+
+This design uses OOD instead of pure mathematical functions using numbers which will consume lot more memory. But trade off
+was made intentionally for better maintainability and flexibility of the application. So, performance will decrease with
+the increased input values (see 'limitations' section below) 
          
 
 # Environment
@@ -34,7 +38,7 @@ size of the deliverable codebase / package which is quite large considering the 
  * Gradle - 3.0
  * Tested on MacOS (OS X EI Capitan - 10.11.6) and Windows 8
   
-# **How to RUN the application**  
+# **How to run the application**  
  
 # Run Tests
 ./gradlew clean test
@@ -46,12 +50,12 @@ size of the deliverable codebase / package which is quite large considering the 
 
 java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=<integer> --k=<integer>
 
-'n' is the number of children playing the game (optional)
-'k' is the counter (optional)
+ - 'n' is the number of children playing the game (optional)
+ - 'k' is the counter (optional)
 
 If you don't provide these values then the program will ask you to provide these values at the start.  
 
-Example:
+`Example:`
 $ java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=5 --k=3
 Number of players = 5, value of k = 3
 Iteration 1 - OUT: Player{id=3}
@@ -71,3 +75,16 @@ Game Result:
  - Make sure user has write permission
 
 **Configuration:** src/main/resources/application.properties
+
+# Limitations
+ * **input values:** values for number of players and counter is assumed to be integer which is limited 
+to a maximum value of 2,147,483,647. But this demo application will struggle with
+big values. Tested (4 core macbook and 16GB ram) with 1 million players with counter
+10 which took approximately 150 seconds to complete with results printed in console and log file.
+ * **performance:** again for the large input values performance will degrade due to
+object creation (Player).
+ * **error handling:** error handling is very basic which is used for demonstration purpose only.
+In some cases exception stack will be displayed in console e.g. for non integer values of 
+command line  values of 'n' and 'k' (--n=a --k=b)
+  
+  

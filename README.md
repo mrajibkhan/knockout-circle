@@ -48,7 +48,7 @@ the increased input values (see 'limitations' section below)
 
 # Run the application
 
-java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=<integer> --k=<integer>
+java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=5 --k=3
 
  - 'n' is the number of children playing the game (optional)
  - 'k' is the counter (optional)
@@ -56,21 +56,22 @@ java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=<integer> --k=<integer>
 If you don't provide these values then the program will ask you to provide these values at the start.  
 
 `Example:`
-$ java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=5 --k=3
-Number of players = 5, value of k = 3
-Iteration 1 - OUT: Player{id=3}
-Iteration 2 - OUT: Player{id=1}
-Iteration 3 - OUT: Player{id=5}
-Iteration 4 - OUT: Player{id=2}
-Winner: Player{id=4}
-Total loop = 4
-Game Result: 
-1 - player#4
-2 - player#2
-3 - player#5
-4 - player#1
-5 - player#3
-
+```
+    $ java -jar build/libs/knockout-0.0.1-SNAPSHOT.jar --n=5 --k=3
+    Number of players = 5, value of k = 3
+    Iteration 1 - OUT: Player{id=3}
+    Iteration 2 - OUT: Player{id=1}
+    Iteration 3 - OUT: Player{id=5}
+    Iteration 4 - OUT: Player{id=2}
+    Winner: Player{id=4}
+    Total loop = 4
+    Game Result: 
+    1 - player#4
+    2 - player#2
+    3 - player#5
+    4 - player#1
+    5 - player#3
+```
 **LOG:** log file will be created at logs/application.log 
  - Make sure user has write permission
 
